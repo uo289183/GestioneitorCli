@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <title>Ejemplo sencillo para consumir un servicio web</title> 
+        <script type="text/javascript"> 
+            function altaAlumno() { 
+
+                const nombre = document.getElementById("nombre").value; 
+                const apellidos = document.getElementById("apellidos").value; 
+                const idUser = document.getElementById("idUser").value; 
+                const email = document.getElementById("email").value; 
+                const alumno = {
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    idUser: idUser,
+                    email: email
+                };
+
+                fetch('http://localhost:8080/gestioneitor2/api/alumno', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(alumno)
+                }).catch(err => alert(err));
+            }
+        </script> 
+    </head> 
+    <body> 
+        <form action=””> 
+            Nombre: <input type="text" id="nombre" size=10/> <br/> 
+            Apellidos: <input type="text" id="apellidos" size=10/> <br/>
+            idUser: <input type="text" id="idUser" size=10/> <br/> 
+            Email: <input type="text" id="email" size=10/> <br/>
+            Botón submit: <input type="submit" id="boton" onclick="altaAlumno()"> 
+        </form> 
+        <script> 
+            document.getElementById("boton").addEventListener("click", function(event){ 
+            event.preventDefault(); //Previene que al pulsar el botón Submit se intente ejecutar la acción del formulario. 
+            //Este es el valor del campo1  
+            });
+        </script> 
+        <p id="demo"></p> 
+        </body> 
+</html> 
